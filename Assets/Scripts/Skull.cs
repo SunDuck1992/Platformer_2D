@@ -4,18 +4,14 @@ using UnityEngine;
 
 public class Skull : MonoBehaviour
 {
-    [SerializeField] private Transform _playerTransform;
+    private int _price = 1;
 
-    private float _distance;
-
-    private void Start()
+    private void OnTriggerEnter2D(Collider2D collider)
     {
-        _playerTransform = GetComponent<Transform>();
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        Destroy(gameObject);
-        FindObjectOfType<SkullCounter>().Count++;
+        if (collider.TryGetComponent<Player>(out Player player))
+        {
+            player.ApplySkulls(_price);
+            Destroy(gameObject);              
+        }      
     }
 }

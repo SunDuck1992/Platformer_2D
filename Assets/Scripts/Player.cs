@@ -4,12 +4,16 @@ using UnityEngine;
 using TMPro;
 
 [RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 
 public class Player : MonoBehaviour
 {
     [SerializeField] private float _speed;
     [SerializeField] private float _jumpForce;
     [SerializeField] private TMP_Text _walletView;
+    [SerializeField] private LayerMask _layerMask;
+
+    public readonly int speed = Animator.StringToHash("Speed");
 
     private bool _isGround;
     private float _rayDistance = 1.5f;
@@ -42,16 +46,16 @@ public class Player : MonoBehaviour
         if (Input.GetKey(KeyCode.D))
         {
             transform.Translate(_coordinataX = _speed * Time.deltaTime, 0, 0);
-            _animator.SetFloat("Speed", Mathf.Abs(_speed));
+            _animator.SetFloat(speed, Mathf.Abs(_speed));
         }
         else if (Input.GetKey(KeyCode.A))
         {
             transform.Translate(_coordinataX = _speed * Time.deltaTime * -1, 0, 0);
-            _animator.SetFloat("Speed", Mathf.Abs(_speed));
+            _animator.SetFloat(speed, Mathf.Abs(_speed));
         }
         else
         {
-            _animator.SetFloat("Speed", 0);
+            _animator.SetFloat(speed, 0);
         }
 
         if (_coordinataX > 0 && !_isFaceRight)
@@ -66,7 +70,7 @@ public class Player : MonoBehaviour
 
     private void Jump()
     {
-        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, Vector2.down, _rayDistance, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, Vector2.down, _rayDistance, _layerMask);
 
         if (hit.collider != null)
         {

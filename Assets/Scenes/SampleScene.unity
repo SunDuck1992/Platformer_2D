@@ -3432,7 +3432,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360823050}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7.478, y: 2.663, z: 0}
+  m_LocalPosition: {x: -7.478, y: 3.97, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 782615234}
@@ -5247,6 +5247,10 @@ PrefabInstance:
       propertyPath: _walletView
       value: 
       objectReference: {fileID: 1889700041}
+    - target: {fileID: 8407066971408868553, guid: 6442a2e8bbe00ae4dad8b9710cbc7d50, type: 3}
+      propertyPath: _layerMask.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8407066971408868564, guid: 6442a2e8bbe00ae4dad8b9710cbc7d50, type: 3}
       propertyPath: m_Name
       value: Player

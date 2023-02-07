@@ -17,7 +17,7 @@ public class Player : MonoBehaviour
 
     private bool _isGround;
     private float _rayDistance = 1.5f;
-    private float _coordinataX;
+    private float _direction;
     private bool _isFaceRight = true;
     private Rigidbody2D _rigidbody;
     private Animator _animator;
@@ -45,12 +45,12 @@ public class Player : MonoBehaviour
     {
         if (Input.GetKey(KeyCode.D))
         {
-            transform.Translate(_coordinataX = _speed * Time.deltaTime, 0, 0);
+            transform.Translate(_direction = _speed * Time.deltaTime, 0, 0);
             _animator.SetFloat(speed, Mathf.Abs(_speed));
         }
         else if (Input.GetKey(KeyCode.A))
         {
-            transform.Translate(_coordinataX = _speed * Time.deltaTime * -1, 0, 0);
+            transform.Translate(_direction = _speed * Time.deltaTime * -1, 0, 0);
             _animator.SetFloat(speed, Mathf.Abs(_speed));
         }
         else
@@ -58,11 +58,11 @@ public class Player : MonoBehaviour
             _animator.SetFloat(speed, 0);
         }
 
-        if (_coordinataX > 0 && !_isFaceRight)
+        if (_direction > 0 && !_isFaceRight)
         {
             Flip();
         }
-        else if (_coordinataX < 0 && _isFaceRight)
+        else if (_direction < 0 && _isFaceRight)
         {
             Flip();
         }
@@ -72,7 +72,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit2D hit = Physics2D.Raycast(_rigidbody.position, Vector2.down, _rayDistance, _layerMask);
 
-        if (hit.collider != null)
+        if (hit.collider)
         {
             _isGround = true;
         }
